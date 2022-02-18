@@ -52,7 +52,7 @@
       - 일정은?
       - 바보같은 관리자와 멍청한 고객은?
       - 좋은 코드를 사수하는 일은 바로 우리 프로그래머들의 책임이다.
-      - 나쁜 코드의 우험을 이해하지 못하는 관리자 말을 그대로 따르는 행동은 전문가답지 못하다.
+      - 나쁜 코드의 위험을 이해하지 못하는 관리자 말을 그대로 따르는 행동은 전문가답지 못하다.
 
 
 ``` 
@@ -123,9 +123,9 @@
     - *변수(혹은 함수나 클래스)의 존재 이유는?*
     - *수행 하는 기능은?*
     - *사용 하는 방법은?*
-    - 따로 주성이 필요하다면 의도를 분명히 드러내지 못했다는 말이다.
+    - 따로 주석이 필요하다면 의도를 분명히 드러내지 못했다는 말이다.
 
-~~~
+~~~java
 (X)
 int d; // 경과 시간(단위 : 날짜)
 
@@ -142,7 +142,7 @@ int daysSinceModification;
   - 여러 계정을 그룹으로 묶는다면?
     - (x) accountList
       - List는 프로그래머에게 특수한 의미이다. 계정을 담는 컨테이너가 실제 List가 아니라면 그릇된 정보를 제공 할 수 있다.
-    - (O) accountGroup, bunchOfAcoount
+    - (O) accountGroup, bunchOfAccount
   - 서로 흡사한 이름을 사용하지 않도록 주의한다.
   - 유사한 개념은 유사한 표기법을 사용하자.
   
@@ -163,7 +163,7 @@ int daysSinceModification;
   - 아래 코드에서 `sum`은 별로 유용하진 않으나 최소한 검색이 가능하다.
   - 그냥 숫자 5를 사용한다면 5가 들어가는 이름을 모두 찾아야 한다.
 
-~~~
+~~~java
 (X)
     for(int j=0; j<34; j++>){
         s += (t[j] * 4)/5;
@@ -189,7 +189,7 @@ int daysSinceModification;
 - Class 이름
   - 클래스 이름과 객체 이름은 명사나 명사구가 적합하다.
     - (O) Customer, WikiPage, Acccount, AddressParser  
-    - (X) Manager, Proccessor, Data, Info
+    - (X) Manager, Processor, Data, Info
     - 동사는 사용하지 않는다.
 
 - Method 이름
@@ -281,3 +281,75 @@ int daysSinceModification;
     - 2. 그렇다면 설정 페이지와 해제 페이지를 넣는다.
     - 3. 페이지를 HTML로 렌더링 한다.  
   - 위 예시는 한가지만 하는가 아니면 세가지를 하는가?
+    - 위에서 언급한 세 단계는 지정된 함수 이름 아래에서 추상화 수준이 하나이다.
+    - 함수는 간단한 TO 문단으로 기술 할 수 있다.
+      - TO? LOGO 언어에서 사용하는 키워드. 루비나 파이썬에서 사용하는 def와 똑같다.
+    - TO RenderPageWithSetupsAndTeardowns, 페이지가 테스트 페이지인지 확인 한 후 테스트 페이지라면 설정 페이지와 해제 페이지를 넣는다. 테스트 페이지든 아니든 페이지를 html로 렌더링 한다.
+    - 지정된 함수 이름 아래에서 추상화 수준이 하나인 단계만 수행한다면 그 함수는 한 가지 작업만 한다.
+
+- 함수당 추상화 수준은 하나로!
+  - 함수가 확실히 `한가지` 작업만 하려면 함수 내 모든 문장의 추상화 수준이 동일 해야 한다.
+
+- 내려가기 규칙(위에서 아래로 코드 읽기)
+  - 코드는 위에서 아래로 이야기 처럼 읽혀야 좋다
+  - 한 함수 다음에는 추상화 수준이 한단계 더 낮은 함수가 온다.
+  - 위에서 아래로 프로그램을 읽으면 함수 추상화 수준이 한 번에 한 단계씩 낮아진다.
+
+- 서술적인 이름을 사용하자
+  - 코드를 읽으면서 짐작했던 기능을 각 루틴이 그대로 수행한다면 깨끗한 코드라 불러도 된다.
+  - 한 가지만 하는 작은 함수에 좋은 이름을 붙힌다면 이런 원칙을 달성함에 있어 이미 절반은 성공
+  - 이름이 길어도 괜찮다. 겁먹을 필요 없다.
+  - 이름을 붙일 때는 일관성이 있어야 하며 모듈 내에서 함수 이름은 같은 문구, 명사, 동사를 사용한다
+    - includeSetupAndTeardownPages, includeSetupPages, includeSuiteSetupPage, includeSetupPage
+
+- 함수의 인수
+  - 함수에서 이상적인 인수 개수는 0개(무항), 다음은 1개(단항), 다음은 2개(이항)
+  - 3개 이상은 가능한 피하는 편이 좋다.
+  - 출력 인수는 입력 인수보다 이해하기 어렵다.
+
+- 플래그 인수
+  - 플래그 인수는 추하다.
+  - 함수로 부울 값을 넘기는 관례는 정말로 끔찍하다.
+  - 이유는 함수로 한꺼번에 여러가지를 처리한다고 공표한 셈이기 때문이다.
+
+- 이항 함수
+  - 인수가 2개인 함수는 인수가 1개인 함수보다 이해하기 어렵다. 
+  
+- 삼항 함수
+  - 삼항 함수를 만들 때는 신중히 고려해야 한다.
+
+- 동사와 키워드
+  - 함수의 의도나 인수의 순서와 의도를 제대로 표현하려면 좋은 함수 이름은 필수다
+  - 단항 함수는 함수와 인수가 동사/명사 쌍을 이루어야 한다.
+  - write(String name), wirteField(String name)
+
+- 부수 효과를 일으키지 말자.
+  - 부수 효과는 거짓말이다.
+  - 함수에서 한가지를 하겠다고 약속하고 남몰래 다른일을 하는 것이다.
+  - 많은 경우 시간적인 결합이나 순서 종석성을 초래한다.
+  - 아래 예제에서 함수가 일으키는 부수효과는 `Session.initialize()` 호출이다.
+  - 이름만 봐서는 세션을 초기화 한다는 사실이 드러나지 않는다.
+  - 그래서 함수 이름만 보고 함수를 호출하는 사용자는 사용자를 인증하면서 기존 세션 정보를 지워버릴 위험에 있다.
+  - 이러한 부수 효과가 시간적인 결합을 초래한다.
+  - `checkPasswordAndInitializeSession` 이라는 이름이 훨씬 좋다.
+  - 물론 함수가 한가지만 한다는 규을 위반하지만..!
+  
+~~~java
+public class UserValidator {
+    private Cryptographer cryptographer;
+    public boolean checkPassword(String userName, String password) { 
+        User user = UserGateway.findByName(userName);
+        if (user != User.NULL) {
+            String codedPhrase = user.getPhraseEncodedByPassword(); 
+            String phrase = cryptographer.decrypt(codedPhrase, password); 
+            if ("Valid Password".equals(phrase)) {
+                Session.initialize();
+                return true; 
+            }
+        }
+        return false; 
+    }
+}
+~~~
+
+

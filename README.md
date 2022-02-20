@@ -240,7 +240,7 @@ int daysSinceModification;
     - 변수를 훑어보면 주소라는 사실을 금방 알아 챌 수 있다.
     - 하지만 어느 메서드가 state라는 변수 하나만 사용한다면? 변수 state가 주소 일부라는 사실을 금방 알 수 있을까?
     - addr이라는 접두어를 추가
-    - addr FisrtName, addrlastName, addrState 라 쓰면 맥락이 좀 더 분명해진다.
+    - addrFisrtName, addrLastName, addrState 라 쓰면 맥락이 좀 더 분명해진다.
     - 변수가 좀 더 큰 구조에 속한다는 사실이 분명해 진다.
 
 - 불필요한 맥락을 없애라
@@ -264,16 +264,16 @@ int daysSinceModification;
 지금은 함수만 살아남았다. 어떤 프로그램이든 가장 기본적인 단위가 함수다. 
 ```
 
-- 작게 만들어라
+- **작게 만들어라**
   - 함수를 잘 만드는 첫번째 규칙은 `작게` 만드는 것이다.
 
-- 블록과 들여쓰기
+- **블록과 들여쓰기**
   - 다시말해 if 문 / else문 / while 문 등에 들어가는 블록은 한줄이어야 한다는 의미
   - 바깥을 감싸는 함수가 작아질 뿐만 아니라 블록 안에서 호출하는 이름을 적절히 짓는다면 코드를 이해하기 쉬워진다.
   - 즉 중첩 구조가 생길 만큼 함수가 커져서는 안된다.
   - 함수에서는 들여쓰기 수준은 1단이나 2단을 넘어서면 안된다.
 
-- 한가지만 해라
+- **한가지만 해라**
   - 함수는 한가지를 해야한다. 그 한가지를 잘 해야한다. 그 한가지만 해야 한다.
   - 이때, 한가지 라는게 정확히 무엇인지 알기가 어렵다,
   - ex)
@@ -287,43 +287,43 @@ int daysSinceModification;
     - TO RenderPageWithSetupsAndTeardowns, 페이지가 테스트 페이지인지 확인 한 후 테스트 페이지라면 설정 페이지와 해제 페이지를 넣는다. 테스트 페이지든 아니든 페이지를 html로 렌더링 한다.
     - 지정된 함수 이름 아래에서 추상화 수준이 하나인 단계만 수행한다면 그 함수는 한 가지 작업만 한다.
 
-- 함수당 추상화 수준은 하나로!
+- **함수당 추상화 수준은 하나로!**
   - 함수가 확실히 `한가지` 작업만 하려면 함수 내 모든 문장의 추상화 수준이 동일 해야 한다.
 
-- 내려가기 규칙(위에서 아래로 코드 읽기)
+- **내려가기 규칙(위에서 아래로 코드 읽기)**
   - 코드는 위에서 아래로 이야기 처럼 읽혀야 좋다
   - 한 함수 다음에는 추상화 수준이 한단계 더 낮은 함수가 온다.
   - 위에서 아래로 프로그램을 읽으면 함수 추상화 수준이 한 번에 한 단계씩 낮아진다.
 
-- 서술적인 이름을 사용하자
+- **서술적인 이름을 사용하자**
   - 코드를 읽으면서 짐작했던 기능을 각 루틴이 그대로 수행한다면 깨끗한 코드라 불러도 된다.
   - 한 가지만 하는 작은 함수에 좋은 이름을 붙힌다면 이런 원칙을 달성함에 있어 이미 절반은 성공
   - 이름이 길어도 괜찮다. 겁먹을 필요 없다.
   - 이름을 붙일 때는 일관성이 있어야 하며 모듈 내에서 함수 이름은 같은 문구, 명사, 동사를 사용한다
     - includeSetupAndTeardownPages, includeSetupPages, includeSuiteSetupPage, includeSetupPage
 
-- 함수의 인수
+- **함수의 인수**
   - 함수에서 이상적인 인수 개수는 0개(무항), 다음은 1개(단항), 다음은 2개(이항)
   - 3개 이상은 가능한 피하는 편이 좋다.
   - 출력 인수는 입력 인수보다 이해하기 어렵다.
 
-- 플래그 인수
+- **플래그 인수**
   - 플래그 인수는 추하다.
   - 함수로 부울 값을 넘기는 관례는 정말로 끔찍하다.
   - 이유는 함수로 한꺼번에 여러가지를 처리한다고 공표한 셈이기 때문이다.
 
-- 이항 함수
+- **이항 함수**
   - 인수가 2개인 함수는 인수가 1개인 함수보다 이해하기 어렵다. 
   
-- 삼항 함수
+- **삼항 함수**
   - 삼항 함수를 만들 때는 신중히 고려해야 한다.
 
-- 동사와 키워드
+- **동사와 키워드**
   - 함수의 의도나 인수의 순서와 의도를 제대로 표현하려면 좋은 함수 이름은 필수다
   - 단항 함수는 함수와 인수가 동사/명사 쌍을 이루어야 한다.
   - write(String name), wirteField(String name)
 
-- 부수 효과를 일으키지 말자.
+- **부수 효과를 일으키지 말자.**
   - 부수 효과는 거짓말이다.
   - 함수에서 한가지를 하겠다고 약속하고 남몰래 다른일을 하는 것이다.
   - 많은 경우 시간적인 결합이나 순서 종석성을 초래한다.
@@ -352,4 +352,99 @@ public class UserValidator {
 }
 ~~~
 
+- **명령과 조회를 분리하라**
+  - 함수는 뭔가를 수행하거나 뭔가에 답하거나 둘중 하나만 해야 한다.
+  
+~~~java
+public boolean set(String attribute, String value);
+~~~
 
+위 함수는 이름이 attribute 인 속성을 찾아 값을 value 로 설정한 후 성공하며 treu, 실패하면 false 를 반환.
+실제로 호출해서 사용한다고 하면 다음과 같이 괴상한 코드가 나온다.
+
+~~~java
+if(set("username","unclebob"))
+~~~
+위 코드는 무슨뜻일까? 
+- "username"이 "unclebob"으로 설정 되어 있는지 확인하는 코드?
+- "username"을 "unclebob"으로 설정하는 코드?
+- 함수를 호출하는 코드만 봐서는 의미가 모호하다.
+- "set"이라는 단어가 동사인지 형용사인지 분간하기 어려운 탓
+
+~~~java
+if(attributeExists("username")){
+  setAttribute("userName", "unclebob");
+}
+~~~
+
+- 해결책은 명령과 조회를 분리해 혼란을 애초에 뿌리뽑는 방법
+
+
+- **오류코드보다 예외를 사용하라**
+  - 명령 함수에서 오류 코드를 반환하는 방식은 명령/조회 분리 규칙을 미묘하게 위반 할 수 있다.
+  - 자칫하면 if 문에서 명령을 표현시긍로 사용하기 쉬운 탓이다.
+  - 아래 코드는 동사/형용사 혼란을 일으키지 않는 대신 여러 단계로 중첩되는 코드를 야기
+  - 오류 코드를 반환하면 호출자는 오류 코드를 곧바로 처리해야 한다는 문제에 부딛힘.
+~~~java
+  if(deletePage(page)==E_OK)
+~~~
+
+~~~java
+if (deletePage(page) == E_OK) {
+  if (registry.deleteReference(page.name) == E_OK) {
+    if (configKeys.deleteKey(page.name.makeKey()) == E_OK){ 
+      logger.log("page deleted");
+    } else {
+      logger.log("configKey not deleted");
+    }
+  } else {
+    logger.log("deleteReference from registry failed"); 
+  }
+} else {
+  logger.log("delete failed"); return E_ERROR;
+}
+
+반면 오류 코드 대신 예외를 사용하면 오류 처리 코드가 원래 코드에서 분리되 므로 코드가 깔끔해진다.
+
+try {
+  deletePage(page); 
+  registry.deleteReference(page.name); 
+  configKeys.deleteKey(page.name.makeKey());
+}
+catch (Exception e) {
+  logger.log(e.getMessage()); 
+}
+~~~
+
+- **Try/Catch 블록 뽑아내기**
+
+- try/catch 블록은 원래 추하다.
+- 코드 구조에 혼란을 일으키며, 정상 동작과 오류 처리 동작을 뒤섞는다.
+- try/catch 블록을 별도 함수로 뽑아내는 편이 좋다.
+
+~~~java
+  public void delete(Page page) { 
+    try {
+      deletePageAndAllReferences(page); 
+    }
+    catch (Exception e) { 
+      logError(e);
+    } 
+  }
+
+  private void deletePageAndAllReferences(Page page) throws Exception { 
+    deletePage(page);
+    registry.deleteReference(page.name); 
+    configKeys.deleteKey(page.name.makeKey());
+  } 
+
+  private void logError(Exception e) { 
+    logger.log(e.getMessage());
+  }
+
+~~~
+
+- delete 함수는 모든 오류를 처리 한다.
+- 실제로 페이지를 제거하는 함수는 deletePageAndAllReferences
+- deletePageAndAllReferences 함수는 예외를 처리하지 않음
+- 정상 동작과 오류 처리 동작을 분리
